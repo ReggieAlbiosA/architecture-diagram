@@ -19,6 +19,7 @@ import {
 } from "@/components/header/client/header";
 import { DesktopViewThemeToggle, MobileViewThemeToggle } from "@/components/header/client/theme-toggle";
 import SearchInterface from "@/components/header/client/search-interface";
+import MobileNavigationRenderer from "@/components/header/client/mobile-navigation";
 import { Github, Network } from "lucide-react";
 
 import {
@@ -126,7 +127,7 @@ export default function RootLayout({
                 {/* Desktop Navigation */}
                 <div className="hidden md:flex gap-x-2">
                   <HeaderNavigation>
-                    <HeaderNavItem href="/diagram">Diagrams</HeaderNavItem>
+                    <HeaderNavItem href="/diagram/git/architecture/local">Diagrams</HeaderNavItem>
                   </HeaderNavigation>
 
                   <HeaderActions className="gap-2">
@@ -159,15 +160,7 @@ export default function RootLayout({
                   <HeaderMobileNavLink href="/diagram">
                     Diagrams
                   </HeaderMobileNavLink>
-                  <HeaderMobileNavLink href="/diagram/git/architecture/local">
-                    Git
-                  </HeaderMobileNavLink>
-                  <HeaderMobileNavLink href="/diagram/docker/core-concepts/architecture">
-                    Docker
-                  </HeaderMobileNavLink>
-                  <HeaderMobileNavLink href="/diagram/linux/filesystem">
-                    Linux
-                  </HeaderMobileNavLink>
+                  <MobileNavigationRenderer />
                   <HeaderMobileDivider className="mt-2 mb-2" />
                   <HeaderMobileNavLink
                     href="https://github.com"

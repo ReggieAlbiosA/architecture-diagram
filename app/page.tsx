@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
 import type { Route } from "next";
 import Link from "next/link";
-import { GitBranch, GitMerge, Layers, Box, Cpu, HardDrive, Network } from "lucide-react";
+import {
+  GitBranch,
+  GitMerge,
+  Layers,
+  Box,
+  Cpu,
+  HardDrive,
+  Network,
+} from "lucide-react";
 import { SiGit, SiDocker, SiLinux } from "react-icons/si";
 
 export const metadata: Metadata = {
-  title: "Architecture Diagram",
+  title: "Architecture Graph",
   description:
     "Interactive, animated architecture diagrams for common system designs. Explore Git, Docker, and Linux internals through curated visualizations.",
 };
@@ -20,13 +28,33 @@ const sections = [
     hoverBorder: "hover:border-[#F05032]/50",
     description:
       "Version control internals — branching models, merge strategies, reset modes, and architecture.",
-    href: "diagram/git/architecture/local",
+    href: "/git/architecture/local",
     topics: [
-      { label: "Architecture", count: 2, icon: Layers, href: "/diagram/git/architecture/local" },
-      { label: "Branching", count: 6, icon: GitBranch, href: "/diagram/git/branching/basics" },
-      { label: "Reset", count: 3, icon: GitMerge, href: "/diagram/git/reset/soft" },
-      { label: "Restore", count: 3, icon: GitMerge, href: "/diagram/git/restore/basic" },
-      { label: "Merging", count: 6, icon: GitMerge, href: "/diagram/git/merging/squash" },
+      {
+        label: "Architecture",
+        count: 2,
+        icon: Layers,
+        href: "/git/architecture/local",
+      },
+      {
+        label: "Branching",
+        count: 6,
+        icon: GitBranch,
+        href: "/git/branching/basics",
+      },
+      { label: "Reset", count: 3, icon: GitMerge, href: "/git/reset/soft" },
+      {
+        label: "Restore",
+        count: 3,
+        icon: GitMerge,
+        href: "/git/restore/basic",
+      },
+      {
+        label: "Merging",
+        count: 6,
+        icon: GitMerge,
+        href: "/git/merging/squash",
+      },
     ],
     diagramCount: 20,
   },
@@ -41,8 +69,18 @@ const sections = [
       "Container platform internals — daemon architecture, containerd, runc, container lifecycle, and isolation.",
     href: "/docker/core-concepts/architecture",
     topics: [
-      { label: "Core Concepts", count: 4, icon: Cpu, href: "/docker/core-concepts/architecture" },
-      { label: "Containers", count: 7, icon: Box, href: "/docker/containers/basics" },
+      {
+        label: "Core Concepts",
+        count: 4,
+        icon: Cpu,
+        href: "/docker/core-concepts/architecture",
+      },
+      {
+        label: "Containers",
+        count: 7,
+        icon: Box,
+        href: "/docker/containers/basics",
+      },
     ],
     diagramCount: 11,
   },
@@ -55,10 +93,20 @@ const sections = [
     hoverBorder: "hover:border-[#FCC624]/50",
     description:
       "Filesystem internals — the FHS directory hierarchy and the storage stack from hardware to userspace.",
-    href: "/diagram/linux/filesystem",
+    href: "/linux/filesystem",
     topics: [
-      { label: "Filesystem", count: 1, icon: HardDrive, href: "/diagram/linux/filesystem" },
-      { label: "Filesystem Format", count: 1, icon: Layers, href: "/diagram/linux/filesystem-format" },
+      {
+        label: "Filesystem",
+        count: 1,
+        icon: HardDrive,
+        href: "/linux/filesystem",
+      },
+      {
+        label: "Filesystem Format",
+        count: 1,
+        icon: Layers,
+        href: "/linux/filesystem-format",
+      },
     ],
     diagramCount: 2,
   },
@@ -73,13 +121,13 @@ export default function HomePage() {
       <div className="flex flex-col items-center justify-center px-6 pt-16 pb-12 md:pt-24 md:pb-16">
         <div className="flex items-center gap-2 mb-6">
           <Network className="h-8 w-8 text-zinc-900 dark:text-white" />
-          <h1 className="text-[clamp(1.25rem,5vw,2.125rem)] font-bold text-zinc-900 dark:text-white tracking-tight">
-            Architecture Diagram
+          <h1 className="text-[clamp(1rem,5vw,2.6rem)] font-bold text-zinc-900 dark:text-white tracking-tight">
+            Architecture Graph
           </h1>
         </div>
-        <p className="text-center text-[clamp(1rem,3vw,2.125rem)] text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
-          Interactive, animated diagrams for common system architectures.
-          Click, explore, and understand how things work.
+        <p className="text-center  text-[clamp(.7rem,4vw,1.5rem)] text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
+          Interactive, animated diagrams for common system architectures. Click,
+          explore, and understand how things work.
         </p>
         <div className="mt-6 flex items-center gap-4 text-sm text-zinc-500 dark:text-zinc-500">
           <span className="font-mono">{totalDiagrams} diagrams</span>
@@ -99,7 +147,9 @@ export default function HomePage() {
             >
               {/* Header */}
               <div className="flex items-center gap-3 mb-4">
-                <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${section.bg}`}>
+                <div
+                  className={`flex h-10 w-10 items-center justify-center rounded-lg ${section.bg}`}
+                >
                   <section.icon className={`h-5 w-5 ${section.color}`} />
                 </div>
                 <div>
@@ -107,7 +157,8 @@ export default function HomePage() {
                     {section.title}
                   </h2>
                   <span className="text-xs font-mono text-zinc-400 dark:text-zinc-500">
-                    {section.diagramCount} diagram{section.diagramCount !== 1 ? "s" : ""}
+                    {section.diagramCount} diagram
+                    {section.diagramCount !== 1 ? "s" : ""}
                   </span>
                 </div>
               </div>
@@ -137,7 +188,9 @@ export default function HomePage() {
 
               {/* Footer */}
               <div className="mt-5 pt-4 border-t border-zinc-100 dark:border-zinc-800">
-                <span className={`text-sm font-medium ${section.color} group-hover:underline`}>
+                <span
+                  className={`text-sm font-medium ${section.color} group-hover:underline`}
+                >
                   Explore {section.title} diagrams &rarr;
                 </span>
               </div>

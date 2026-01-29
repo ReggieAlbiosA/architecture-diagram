@@ -54,7 +54,7 @@ function useSidebarCollapsible() {
   const context = React.useContext(SidebarCollapsibleContext);
   if (!context) {
     throw new Error(
-      "SidebarNavigationTrigger and SidebarNavigationGroup must be used within SidebarNavigationSection."
+      "SidebarNavigationTrigger and SidebarNavigationGroup must be used within SidebarNavigationSection.",
     );
   }
   return context;
@@ -96,7 +96,7 @@ export function Sidebar({
         "bg-white dark:bg-zinc-900",
         "shadow-sm dark:shadow-zinc-900/50",
         sticky,
-        props.className
+        props.className,
       )}
       role="complementary"
       aria-label="Sidebar navigation"
@@ -117,7 +117,7 @@ export function SidebarHeader(props: React.HTMLAttributes<HTMLElement>) {
       className={cn(
         "px-4 pt-4 pb-2 border-b border-zinc-200 dark:border-zinc-800",
         "bg-white dark:bg-zinc-900",
-        props.className
+        props.className,
       )}
     >
       {props.children}
@@ -132,7 +132,7 @@ export function SidebarFooter(props: React.HTMLAttributes<HTMLElement>) {
       className={cn(
         "px-4 pt-4 pb-4 mt-auto border-t border-zinc-200 dark:border-zinc-800",
         "bg-white dark:bg-zinc-900",
-        props.className
+        props.className,
       )}
     >
       {props.children}
@@ -147,7 +147,7 @@ export function SidebarContent(props: React.HTMLAttributes<HTMLElement>) {
       className={cn(
         "flex-1 overflow-y-auto px-4 py-4",
         "space-y-6 flex flex-col",
-        props.className
+        props.className,
       )}
     >
       {props.children}
@@ -162,7 +162,7 @@ export function SidebarNavigation(props: React.HTMLAttributes<HTMLElement>) {
       className={cn(
         "space-y-2 flex flex-col list-none",
         "w-full",
-        props.className
+        props.className,
       )}
       role="navigation"
     >
@@ -175,8 +175,7 @@ export function SidebarNavigation(props: React.HTMLAttributes<HTMLElement>) {
 // Sidebar Navigation Section (Provides Context)
 // ============================================================================
 
-interface SidebarNavigationSectionProps
-  extends React.HTMLAttributes<HTMLElement> {
+interface SidebarNavigationSectionProps extends React.HTMLAttributes<HTMLElement> {
   collapsible?: boolean;
   defaultOpen?: boolean;
   routes?: string[]; // Array of routes in this section to auto-expand based on pathname
@@ -195,7 +194,7 @@ export function SidebarNavigationSection({
   const isActive = React.useMemo(() => {
     if (routes.length === 0) return false;
     return routes.some(
-      (route) => pathname === route || pathname.startsWith(route + "/")
+      (route) => pathname === route || pathname.startsWith(route + "/"),
     );
   }, [pathname, routes]);
 
@@ -203,7 +202,7 @@ export function SidebarNavigationSection({
   const [isOpen, setIsOpen] = React.useState(() => {
     if (routes.length > 0) {
       return routes.some(
-        (route) => pathname === route || pathname.startsWith(route + "/")
+        (route) => pathname === route || pathname.startsWith(route + "/"),
       );
     }
     return defaultOpen;
@@ -213,7 +212,7 @@ export function SidebarNavigationSection({
   React.useEffect(() => {
     if (routes.length > 0) {
       const shouldBeOpen = routes.some(
-        (route) => pathname === route || pathname.startsWith(route + "/")
+        (route) => pathname === route || pathname.startsWith(route + "/"),
       );
       setIsOpen(shouldBeOpen);
     }
@@ -242,8 +241,7 @@ export function SidebarNavigationSection({
 // Collapsible System: Trigger (Consumes Context)
 // ============================================================================
 
-interface SidebarNavigationTriggerProps
-  extends React.HTMLAttributes<HTMLHeadingElement> {
+interface SidebarNavigationTriggerProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children: React.ReactNode;
   asChild?: boolean;
 }
@@ -291,7 +289,9 @@ export function SidebarNavigationTrigger({
         collapsible &&
           "cursor-pointer select-none hover:text-zinc-700 dark:hover:text-zinc-300",
         // Only apply hover background for root level (no border line)
-        collapsible && !showBorderLine && "hover:bg-zinc-100 dark:hover:bg-zinc-800"
+        collapsible &&
+          !showBorderLine &&
+          "hover:bg-zinc-100 dark:hover:bg-zinc-800",
       )}
     >
       {children}
@@ -302,7 +302,7 @@ export function SidebarNavigationTrigger({
             isActive
               ? "text-zinc-500 dark:text-zinc-400"
               : "text-zinc-400 dark:text-zinc-500",
-            isOpen && "rotate-90"
+            isOpen && "rotate-90",
           )}
         />
       )}
@@ -314,8 +314,7 @@ export function SidebarNavigationTrigger({
 // Sidebar Group (Conditionally visible, consumes context)
 // ============================================================================
 
-interface SidebarNavigationGroupProps
-  extends React.HTMLAttributes<HTMLElement> {
+interface SidebarNavigationGroupProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
 }
 
@@ -334,7 +333,7 @@ export function SidebarNavigationGroup({
         "list-none pl-2 ml-2",
         "transition-all duration-200 ease-in-out",
         "w-full",
-        props.className
+        props.className,
       )}
       role="group"
     >
@@ -347,8 +346,10 @@ export function SidebarNavigationGroup({
 // Sidebar Navigation Item Link
 // ============================================================================
 
-interface SidebarNavigationItemLinkProps
-  extends Omit<React.HTMLAttributes<HTMLLIElement>, "children"> {
+interface SidebarNavigationItemLinkProps extends Omit<
+  React.HTMLAttributes<HTMLLIElement>,
+  "children"
+> {
   href: string | Route;
   children: React.ReactNode;
 }
@@ -367,7 +368,7 @@ export function SidebarNavigationItemLink({
       className={cn(
         "list-none w-full",
         "transition-all duration-150 ease-in-out",
-        props.className
+        props.className,
       )}
       role="listitem"
     >
@@ -387,7 +388,7 @@ export function SidebarNavigationItemLink({
                 "text-zinc-700 dark:text-zinc-300",
                 "hover:text-zinc-900 dark:hover:text-zinc-100",
                 "hover:border-zinc-500 dark:hover:border-zinc-500",
-              ]
+              ],
         )}
       >
         {children}
@@ -400,8 +401,7 @@ export function SidebarNavigationItemLink({
 // Sidebar Navigation Item (for non-link items, backward compatibility)
 // ============================================================================
 
-interface SidebarNavigationItemProps
-  extends React.HTMLAttributes<HTMLLIElement> {
+interface SidebarNavigationItemProps extends React.HTMLAttributes<HTMLLIElement> {
   children: React.ReactNode;
 }
 
@@ -415,7 +415,7 @@ export function SidebarNavigationItem({
       className={cn(
         "list-none w-full",
         "transition-all duration-150 ease-in-out",
-        props.className
+        props.className,
       )}
       role="listitem"
     >

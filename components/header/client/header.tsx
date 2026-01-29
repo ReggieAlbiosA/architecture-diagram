@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Route } from "next";
 import { cn } from "@/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronRight } from "lucide-react";
 
 // ============================================================================
 // Types
@@ -171,7 +171,7 @@ export function HeaderNavItem({
           "transition-all duration-150 ease-in-out",
           // Active state
           isActive
-            ? ["text-zinc-900", "font-semibold"]
+            ? ["text-zinc-900", "font-semibold", "dark:text-white"]
             : [
                 "text-zinc-700 dark:text-zinc-300",
                 "hover:text-zinc-900 dark:hover:text-zinc-100",
@@ -266,6 +266,28 @@ export function HeaderMobileMenu({
 }: HeaderMobileMenuProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const toggle = () => setIsOpen((prev) => !prev);
+
+  // Auto-close when viewport crosses md breakpoint (768px)
+  React.useEffect(() => {
+    const mql = window.matchMedia("(min-width: 768px)");
+    const handler = (e: MediaQueryListEvent) => {
+      if (e.matches) setIsOpen(false);
+    };
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
+  // Lock body scroll when menu is open
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   return (
     <HeaderMobileMenuContext.Provider value={{ isOpen, toggle }}>
@@ -395,7 +417,9 @@ export function HeaderMobileNavLink({
 // Mobile Menu: Divider
 // ============================================================================
 
-export function HeaderMobileDivider(props: React.HTMLAttributes<HTMLDivElement>) {
+export function HeaderMobileDivider(
+  props: React.HTMLAttributes<HTMLDivElement>,
+) {
   return (
     <div
       {...props}
@@ -404,5 +428,138 @@ export function HeaderMobileDivider(props: React.HTMLAttributes<HTMLDivElement>)
         props.className,
       )}
     />
+  );
+}
+
+// ============================================================================
+// Mobile Menu: Collapsible Navigation Section (for hierarchical nav)
+// ============================================================================
+
+const MobileNavDepthContext = React.createContext<number>(0);
+
+interface MobileNavSectionContextProps {
+  isOpen: boolean;
+  toggle: () => void;
+}
+
+const MobileNavSectionContext =
+  React.createContext<MobileNavSectionContextProps | null>(null);
+
+function useMobileNavSection() {
+  const context = React.useContext(MobileNavSectionContext);
+  if (!context) {
+    throw new Error(
+      "HeaderMobileNavSectionTrigger and HeaderMobileNavSectionGroup must be used within HeaderMobileNavSection.",
+    );
+  }
+  return context;
+}
+
+interface HeaderMobileNavSectionProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  routes?: string[];
+  defaultOpen?: boolean;
+}
+
+export function HeaderMobileNavSection({
+  routes = [],
+  defaultOpen = false,
+  children,
+  ...props
+}: HeaderMobileNavSectionProps) {
+  const pathname = usePathname();
+  const depth = React.useContext(MobileNavDepthContext);
+
+  const [isOpen, setIsOpen] = React.useState(() => {
+    if (routes.length > 0) {
+      return routes.some(
+        (route) => pathname === route || pathname.startsWith(route + "/"),
+      );
+    }
+    return defaultOpen;
+  });
+
+  React.useEffect(() => {
+    if (routes.length > 0) {
+      const shouldBeOpen = routes.some(
+        (route) => pathname === route || pathname.startsWith(route + "/"),
+      );
+      if (shouldBeOpen) setIsOpen(true);
+    }
+  }, [pathname, routes]);
+
+  const toggle = () => setIsOpen((prev) => !prev);
+
+  return (
+    <MobileNavDepthContext.Provider value={depth + 1}>
+      <MobileNavSectionContext.Provider value={{ isOpen, toggle }}>
+        <div {...props} className={cn("flex flex-col", props.className)}>
+          {children}
+        </div>
+      </MobileNavSectionContext.Provider>
+    </MobileNavDepthContext.Provider>
+  );
+}
+
+interface HeaderMobileNavSectionTriggerProps
+  extends React.HTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+}
+
+export function HeaderMobileNavSectionTrigger({
+  children,
+  ...props
+}: HeaderMobileNavSectionTriggerProps) {
+  const { isOpen, toggle } = useMobileNavSection();
+  const depth = React.useContext(MobileNavDepthContext);
+
+  return (
+    <button
+      {...props}
+      onClick={(e) => {
+        toggle();
+        props.onClick?.(e);
+      }}
+      className={cn(
+        "flex items-center justify-between w-full text-left",
+        "py-2.5 transition-colors",
+        depth <= 1
+          ? "text-base font-medium text-zinc-900 dark:text-white"
+          : "text-sm text-zinc-700 dark:text-zinc-300",
+        "hover:text-zinc-900 dark:hover:text-white",
+        props.className,
+      )}
+    >
+      {children}
+      <ChevronRight
+        className={cn(
+          "h-4 w-4 shrink-0 text-zinc-400 dark:text-zinc-500 transition-transform duration-200",
+          isOpen && "rotate-90",
+        )}
+      />
+    </button>
+  );
+}
+
+interface HeaderMobileNavSectionGroupProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+export function HeaderMobileNavSectionGroup({
+  children,
+  ...props
+}: HeaderMobileNavSectionGroupProps) {
+  const { isOpen } = useMobileNavSection();
+
+  if (!isOpen) return null;
+
+  return (
+    <div
+      {...props}
+      className={cn("flex flex-col pl-4", props.className)}
+    >
+      {children}
+    </div>
   );
 }

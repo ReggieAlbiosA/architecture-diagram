@@ -106,7 +106,7 @@ export default function DiagramLayout({
 }) {
   return (
    <div className="flex"> 
-        <Sidebar width={250} className="flex flex-col sticky " topOffset={56}  >
+        <Sidebar width={250} className="hidden md:flex flex-col sticky dark:bg-[#0a0a0a] border-0 border-r-1" topOffset={56}  >
           <SidebarContent className="flex flex-col">
             <SidebarNavigation>
               <NavigationRenderer items={navigationConfig} />
