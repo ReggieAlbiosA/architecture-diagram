@@ -92,7 +92,7 @@ export function Sidebar({
       }}
       className={cn(
         maxHeight,
-        "sticky overflow-y-auto border border-zinc-200 dark:border-zinc-800",
+        "sticky overflow-y-auto border-[1px] border-t-0  border-r-zinc-200 dark:border-r-zinc-800",
         "bg-white dark:bg-zinc-900",
         "shadow-sm dark:shadow-zinc-900/50",
         sticky,

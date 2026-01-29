@@ -171,7 +171,7 @@ export function HeaderNavItem({
           "transition-all duration-150 ease-in-out",
           // Active state
           isActive
-            ? ["text-zinc-900", "font-semibold", "bg-zinc-100"]
+            ? ["text-zinc-900", "font-semibold"]
             : [
                 "text-zinc-700 dark:text-zinc-300",
                 "hover:text-zinc-900 dark:hover:text-zinc-100",

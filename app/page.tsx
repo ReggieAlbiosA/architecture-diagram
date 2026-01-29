@@ -5,7 +5,7 @@ import { GitBranch, GitMerge, Layers, Box, Cpu, HardDrive, Network } from "lucid
 import { SiGit, SiDocker, SiLinux } from "react-icons/si";
 
 export const metadata: Metadata = {
-  title: "Architecture Graph",
+  title: "Architecture Diagram",
   description:
     "Interactive, animated architecture diagrams for common system designs. Explore Git, Docker, and Linux internals through curated visualizations.",
 };
@@ -73,11 +73,11 @@ export default function HomePage() {
       <div className="flex flex-col items-center justify-center px-6 pt-16 pb-12 md:pt-24 md:pb-16">
         <div className="flex items-center gap-2 mb-6">
           <Network className="h-8 w-8 text-zinc-900 dark:text-white" />
-          <h1 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white tracking-tight">
-            Architecture Graph
+          <h1 className="text-[clamp(1.25rem,5vw,2.125rem)] font-bold text-zinc-900 dark:text-white tracking-tight">
+            Architecture Diagram
           </h1>
         </div>
-        <p className="text-center text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
+        <p className="text-center text-[clamp(1rem,3vw,2.125rem)] text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
           Interactive, animated diagrams for common system architectures.
           Click, explore, and understand how things work.
         </p>

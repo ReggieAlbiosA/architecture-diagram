@@ -98,17 +98,16 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${jetBrains.variable}`}
     >
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body className="min-h-screen bg-background overflow-x-hidden font-sans antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-col h-screen overflow-hidden">
-            <HeaderMobileMenu>
+          <HeaderMobileMenu>
               <Header
-                sticky={false}
+                sticky
                 topOffset={0}
                 className="flex-shrink-0 bg-white flex justify-between items-center h-14 px-4 md:px-10 dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800"
               >
@@ -118,7 +117,7 @@ export default function RootLayout({
                     <div className="flex h-8 w-8 items-center justify-center rounded-md bg-zinc-900 dark:bg-white text-white dark:text-zinc-900">
                       <Network className="h-5 w-5" />
                     </div>
-                    <span className="text-lg font-semibold text-zinc-900 dark:text-white">
+                    <span className="text-[clamp(.7rem,3.1vw,1.125rem)] font-semibold text-zinc-900 whitespace-nowrap dark:text-white">
                       Architecture Graph
                     </span>
                   </HeaderBrandLink>
@@ -182,12 +181,9 @@ export default function RootLayout({
                   <MobileViewThemeToggle />
                 </nav>
               </HeaderMobileMenuContent>
-            </HeaderMobileMenu>
 
-            <main className="flex-1 bg-white dark:bg-zinc-900 overflow-auto">
               {children}
-            </main>
-          </div>
+          </HeaderMobileMenu>
         </ThemeProvider>
       </body>
     </html>

@@ -105,20 +105,15 @@ export default function DiagramLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-[calc(100vh-3.5rem)]">
-      <aside
-        className="hidden lg:block flex-shrink-0"
-        role="complementary"
-        aria-label="Table of contents"
-      >
-        <Sidebar width={280} className="flex flex-col" sticky topOffset={56}>
+   <div className="flex"> 
+        <Sidebar width={250} className="flex flex-col sticky " topOffset={56}  >
           <SidebarContent className="flex flex-col">
             <SidebarNavigation>
               <NavigationRenderer items={navigationConfig} />
             </SidebarNavigation>
           </SidebarContent>
         </Sidebar>
-      </aside>
+     
       <main className="flex-1 min-w-0 overflow-auto">
         {children}
       </main>
