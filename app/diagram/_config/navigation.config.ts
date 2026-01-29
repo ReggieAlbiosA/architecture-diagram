@@ -5,6 +5,7 @@ import {
   Box,
   Layers,
   type LucideIcon,
+  Shield,
 } from "lucide-react";
 import { SiGit, SiDocker, SiLinux } from "react-icons/si";
 import { IconType } from "react-icons/lib";
@@ -305,6 +306,25 @@ export const navigationConfig: NavigationItem[] = [
         type: "link",
         label: "Filesystem Format",
         href: "/diagram/linux/filesystem-format",
+      },
+    ],
+  },
+  {
+    type: "section",
+    label: "Authentication",
+    icon: Shield,
+    collapsible: true,
+    defaultOpen: false,
+    children: [
+      {
+        type: "link",
+        label: "Session Cookies",
+        href: "/diagram/authentication/session-cookies",
+      },
+      {
+        type: "link",
+        label: "JWT",
+        href: "/diagram/authentication/jwt",
       },
     ],
   },

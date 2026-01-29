@@ -2,14 +2,14 @@
 
 import * as React from "react";
 import * as d3 from "d3";
-import { useDiagram } from "../../../_lib/core/provider";
+import { useDiagram } from "../../_lib/core/provider";
 import {
   generateLinkPath,
   getNodeColor,
   createArrowMarker,
   createParticleAnimation,
   createFlashEffect,
-} from "../../../_lib/utils/d3-helpers";
+} from "../../_lib/utils/d3-helpers";
 
 // ============================================================================
 // Git Diagram Renderer - Renders Git-specific diagrams (nodes, links, branches)

@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import type { DockerZone } from "../../../../_lib/types/docker-types";
+import type { DockerZone } from "../../../_lib/types/docker-types";
 import { COMPONENT_POSITIONS } from "../../_config/zones";
 import { dockerColors } from "../../_config/colors";
 

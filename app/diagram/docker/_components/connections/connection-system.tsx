@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import type { ConnectionLine } from "../../../../_lib/types/docker-types";
+import type { ConnectionLine } from "../../../_lib/types/docker-types";
 
 /**
  * Draw an animated connection line between two points

@@ -1,14 +1,14 @@
 "use client";
 
-import { DiagramProvider } from "../../../../_lib/core/provider";
+import { DiagramProvider } from "../../../_lib/core/provider";
 import {
   DiagramLayout,
   DiagramHeader,
   DiagramControls,
   DiagramCard,
   DiagramRenderer,
-} from "../../../../_lib/ui/diagram-ui";
-import { DiagramConfig } from "../../../../_lib/types";
+} from "../../../_lib/ui/diagram-ui";
+import { DiagramConfig } from "../../../_lib/types";
 
 export const gitFastForwardMergeConfig: DiagramConfig = {
   id: "git-fast-forward-merge",

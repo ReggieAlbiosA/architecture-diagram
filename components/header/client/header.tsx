@@ -269,7 +269,7 @@ export function HeaderMobileMenu({
 
   // Auto-close when viewport crosses md breakpoint (768px)
   React.useEffect(() => {
-    const mql = window.matchMedia("(min-width: 768px)");
+    const mql = window.matchMedia("(min-width: 1024px)");
     const handler = (e: MediaQueryListEvent) => {
       if (e.matches) setIsOpen(false);
     };

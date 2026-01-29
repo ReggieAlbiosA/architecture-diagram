@@ -13,7 +13,7 @@ import {
 import {
   navigationConfig,
   type NavigationItem,
-} from "../_config/navigation.config";
+} from "./_config/navigation.config";
 
 // Helper function to extract all routes from a section's children (recursively)
 function extractRoutes(items: NavigationItem[]): string[] {
@@ -105,18 +105,20 @@ export default function DiagramLayout({
   children: React.ReactNode;
 }) {
   return (
-   <div className="flex"> 
-        <Sidebar width={250} className="hidden md:flex flex-col sticky dark:bg-[#0a0a0a] border-0 border-r-1" topOffset={56}  >
-          <SidebarContent className="flex flex-col">
-            <SidebarNavigation>
-              <NavigationRenderer items={navigationConfig} />
-            </SidebarNavigation>
-          </SidebarContent>
-        </Sidebar>
-     
-      <main className="flex-1 min-w-0 overflow-auto">
-        {children}
-      </main>
+    <div className="flex">
+      <Sidebar
+        width={280}
+        className="hidden lg:flex flex-col sticky dark:bg-[#0a0a0a] border-0 border-r-1"
+        topOffset={56}
+      >
+        <SidebarContent className="flex flex-col">
+          <SidebarNavigation>
+            <NavigationRenderer items={navigationConfig} />
+          </SidebarNavigation>
+        </SidebarContent>
+      </Sidebar>
+
+      <main className="flex-1 min-w-0 overflow-auto">{children}</main>
     </div>
   );
 }

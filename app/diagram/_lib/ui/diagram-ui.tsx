@@ -228,4 +228,4 @@ export function DiagramControls({ className }: DiagramControlsProps) {
 // Import and use the appropriate renderer for your diagram type
 
 // Backward compatibility export (for Git)
-export { DiagramRenderer } from "../../diagram/git/_components/git-diagram-renderer";
+export { DiagramRenderer } from "../../git/_components/git-diagram-renderer";

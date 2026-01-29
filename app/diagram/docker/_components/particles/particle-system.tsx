@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import type { ParticleAnimation } from "../../../../_lib/types/docker-types";
+import type { ParticleAnimation } from "../../../_lib/types/docker-types";
 
 /**
  * Create and animate a particle from one position to another

@@ -2,7 +2,7 @@
 // Docker Zone Definitions
 // ============================================================================
 
-import type { DockerZone } from "../../../_lib/types/docker-types";
+import type { DockerZone } from "../../_lib/types/docker-types";
 import { dockerColors } from "./colors";
 
 export const DOCKER_ZONES: DockerZone[] = [

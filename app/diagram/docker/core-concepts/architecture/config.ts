@@ -1,4 +1,4 @@
-import type { DockerDiagramConfig } from "../../../../_lib/types/docker-types";
+import type { DockerDiagramConfig } from "../../../_lib/types/docker-types";
 import { DOCKER_ZONES, COMPONENT_POSITIONS } from "../../_config/zones";
 import { dockerColors } from "../../_config/colors";
 import { DOCKER_DEFAULTS } from "../../_config/defaults";

@@ -9,7 +9,7 @@ import {
 import {
   navigationConfig,
   type NavigationItem,
-} from "@/app/_config/navigation.config";
+} from "@/app/diagram/_config/navigation.config";
 
 function extractRoutes(items: NavigationItem[]): string[] {
   const routes: string[] = [];
