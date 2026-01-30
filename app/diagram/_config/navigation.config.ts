@@ -6,6 +6,7 @@ import {
   Layers,
   type LucideIcon,
   Shield,
+  ShieldAlertIcon,
 } from "lucide-react";
 import { SiGit, SiDocker, SiLinux } from "react-icons/si";
 import { IconType } from "react-icons/lib";
@@ -325,6 +326,29 @@ export const navigationConfig: NavigationItem[] = [
         type: "link",
         label: "JWT",
         href: "/diagram/authentication/jwt",
+      },
+    ],
+  },
+  {
+    type: "section",
+    label: "Cyber Threat",
+    icon: ShieldAlertIcon,
+    collapsible: true,
+    defaultOpen: false,
+    children: [
+      {
+        type: "section",
+        label: "Denial-of-Service",
+        icon: Box,
+        collapsible: true,
+        defaultOpen: false,
+        children: [
+          {
+            type: "link",
+            label: "Multi-Vector DDoS",
+            href: "/diagram/cyber-threat/denial-of-service/multi-vector-ddos",
+          },
+        ],
       },
     ],
   },
