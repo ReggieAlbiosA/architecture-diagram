@@ -7,6 +7,8 @@ import {
   type LucideIcon,
   Shield,
   ShieldAlertIcon,
+  TriangleAlert,
+  TriangleAlertIcon,
 } from "lucide-react";
 import { SiGit, SiDocker, SiLinux } from "react-icons/si";
 import { IconType } from "react-icons/lib";
@@ -339,7 +341,7 @@ export const navigationConfig: NavigationItem[] = [
       {
         type: "section",
         label: "Denial-of-Service",
-        icon: Box,
+        icon: TriangleAlertIcon,
         collapsible: true,
         defaultOpen: false,
         children: [
